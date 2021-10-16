@@ -4,13 +4,11 @@
 class BaseModule{
 
 public:
-    BaseModule();
+    BaseModule(){};
 
     virtual void init_pins() = 0;
 
     virtual void reset() = 0;
-
-    virtual String to_string() = 0;
 };
 
 #endif // __BASE_MODULE_H

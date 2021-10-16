@@ -12,3 +12,7 @@ Images for wirings and example programs will be added in separate timing on mast
 
 <br>Module Descriptions
 -
+
+<br>DISCLAMER
+-
+These modules were all written while I was drunk, and tested while I was drunk.

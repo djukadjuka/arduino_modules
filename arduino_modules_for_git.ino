@@ -12,12 +12,12 @@ void setup() {
 	// put your setup code here, to run once:
 	Serial.begin(9600);
 
-    state_machine->init_pins();
+    state_machine.init_pins();
 }
-
+  
 void loop() {
-	state_machine.UpdateResetModules();
-	state_machine.Update();
+	state_machine.update_reset();
+	state_machine.update();
 }
 
 #endif // __PROJECT_H

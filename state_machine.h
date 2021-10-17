@@ -4,7 +4,7 @@
 #include "base_module.h"
 
 // Includes for other modules ...
-
+#include "led_module.h"
 
 // STATE DEFINITIONS
 #define SS_INIT (0)
@@ -17,6 +17,8 @@
 // MILLISECOND DEFINITIONS
 // Two seconds to reset
 #define MS_RESET_DELAY (2000)
+#define MS_LED_ON (2000)
+#define MS_LED_OFF (1000)
 
 // OTHER DEFINITIONS (STR for LCD, ...)
 
@@ -32,17 +34,17 @@ class StateMachine: public BaseModule{
     int last_state_reset;
 
 	// TODO: Add modules here ...
-
+    LEDModule led_module;
 
 public:
     void init_pins(){
         // TODO: Init pins
-        
+        this->led_module.init_pins();
     }
 
     void reset(){
         // TODO: Reset modules
-        
+        this->led_module.reset();
     }
 
     StateMachine(){
@@ -68,7 +70,7 @@ public:
 
         // Begin state logic
         if(SS_INIT == this->current_state){
-            
+            this->led_module.toggle_dif(current_millis, MS_LED_ON, MS_LED_OFF, LED_PIN);
         }
     }
 

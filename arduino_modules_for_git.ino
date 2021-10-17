@@ -1,9 +1,6 @@
 #if !defined(__PROJECT_H)
 #define __PROJECT_H
 
-#define TRUE (1)
-#define FALSE (0)
-
 #include "state_machine.h"
 
 StateMachine state_machine;

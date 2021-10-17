@@ -4,7 +4,7 @@
 #include "base_module.h"
 
 // Includes for other modules ...
-#include "lcd_module.h"
+
 
 // STATE DEFINITIONS
 #define SS_INIT (0)
@@ -31,18 +31,18 @@ class StateMachine: public BaseModule{
     int current_state_reset;
     int last_state_reset;
 
-	// Add modules here ...
-    LCDModule lcd_module;
-	
+	// TODO: Add modules here ...
+
+
 public:
     void init_pins(){
         // TODO: Init pins
-        this->lcd_module.init_pins();
+        
     }
 
     void reset(){
         // TODO: Reset modules
-        this->lcd_module.reset();
+        
     }
 
     StateMachine(){
@@ -68,7 +68,7 @@ public:
 
         // Begin state logic
         if(SS_INIT == this->current_state){
-            this->lcd_module.print_string("Hello world!");
+            
         }
     }
 

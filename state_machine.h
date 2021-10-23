@@ -1,10 +1,12 @@
 #if !defined(__STATE_MACHINE_H)
 #define __STATE_MACHINE_H
 
+#include "pins_arduino.h"
+
 #include "base_module.h"
 
-// Includes for other modules ...
-
+// TODO: Includes for other modules ...
+#include "joystick_module.h"
 
 // STATE DEFINITIONS
 #define SS_INIT (0)
@@ -33,17 +35,19 @@ class StateMachine: public BaseModule{
     int last_state_reset;
 
 	// TODO: Add modules here ...
+    JoystickModule joystick_module = JoystickModule(A0, A1);
     
 
 public:
     void init_pins(){
         // TODO: Init pins
+        joystick_module.init_pins();
         
     }
 
     void reset(){
         // TODO: Reset modules
-        
+        joystick_module.reset();
     }
 
     StateMachine(){
@@ -69,7 +73,21 @@ public:
 
         // Begin state logic
         if(SS_INIT == this->current_state){
-            
+            if(joystick_module.down()){
+                Serial.println("down");
+            }
+            if(joystick_module.left()){
+                Serial.println("left");
+            }
+            if(joystick_module.right()){
+                Serial.println("right");
+            }
+            if(joystick_module.up()){
+                Serial.println("up");
+            }
+            if(joystick_module.mid()){
+                Serial.println("mid");
+            }
         }
     }
 

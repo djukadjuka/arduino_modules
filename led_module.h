@@ -3,9 +3,9 @@
 
 #include "base_module.h"
 
-#define LED_PIN (3)
-
 class LEDModule: public BaseModule{
+
+    int led_pin;
 
     unsigned long last_inner_update_time;
     unsigned long on_time;
@@ -13,12 +13,13 @@ class LEDModule: public BaseModule{
 
 public:
     
-    LEDModule(){
+    LEDModule(int led_pin){
+        this->led_pin = led_pin;
         this->set_last_inner_update_time(millis());
     }
 
-    bool is_led_on(int led_id){
-        if(digitalRead(led_id)){
+    bool is_led_on(){
+        if(digitalRead(this->led_pin)){
             return true;
         }
         return false;
@@ -41,40 +42,32 @@ public:
         this->on_time = on_time;
     }
 
-    void led_on(int led_id){
-        digitalWrite(led_id, HIGH);
+    void turn_led_on(){
+        digitalWrite(this->led_pin, HIGH);
     }
 
-    void led_off(int led_id){
-        digitalWrite(led_id, LOW);
+    void turn_led_off(int led_id){
+        digitalWrite(this->led_pin, LOW);
     }
 
     void init_pins(){
-        pinMode(LED_PIN, OUTPUT);
+        pinMode(this->led_pin, OUTPUT);
     }
 
     void reset(){
         this->set_last_inner_update_time(0);
     }
 
-    void toggle_led(int led_id){
-        if(is_led_on(led_id) == true){
-            this->led_off(led_id);
+    void toggle_led(){
+        if(is_led_on(this->led_pin) == true){
+            this->led_off();
         }else{
-            this->led_on(led_id);
+            this->led_on();
         }
     }
 
-    void off_all(){
-        this->led_off(LED_PIN);
-    }
-
-    void on_all(){
-        this->led_on(LED_PIN);
-    }
-
-    unsigned short toggle_dif(unsigned long current_millis, unsigned long on_time, unsigned long off_time, int led_id){
-        bool led_state = is_led_on(led_id);
+    unsigned short toggle_dif(unsigned long current_millis, unsigned long on_time, unsigned long off_time){
+        bool led_state = is_led_on();
 
         unsigned long update_time;
         if(!led_state){
@@ -84,7 +77,7 @@ public:
         }
 
         if(current_millis - this->last_inner_update_time >= update_time){
-            this->toggle_led(led_id);
+            this->toggle_led();
             this->last_inner_update_time = current_millis;
             return true;
         }else{

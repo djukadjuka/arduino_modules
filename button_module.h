@@ -3,14 +3,17 @@
 
 #include "base_module.h"
 
-#define BUTTON_PIN (3)
 #define BUTTON_STATE_PRESSED (1)
 
 class ButtonModule: public BaseModule{
-
+    int button_pin;
 public:
+    ButtonModule(int button_pin){
+        this->button_pin = button_pin;
+    }
+
     void init_pins(){
-        pinMode(BUTTON_PIN, INPUT);
+        pinMode(this->button_pin, INPUT);
     }
 
     void reset(){
@@ -18,7 +21,7 @@ public:
     }
 
     int get_button_state(){
-        return digitalRead(BUTTON_PIN);
+        return digitalRead(this->button_pin);
     }
 };
 

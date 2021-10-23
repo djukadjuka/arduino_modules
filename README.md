@@ -15,6 +15,7 @@ Supported modules:
 - LED
 - Push button
 - LCD
+- Joystick
 
 <br>Module Descriptions
 ==

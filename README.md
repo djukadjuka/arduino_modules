@@ -20,19 +20,19 @@ Supported modules:
 ==
 LED Module:
 --
-![Led module](https://github.com/djukadjuka/arduino_modules/blob/master/led_module_running.png?raw=true)
+![Led module](https://github.com/djukadjuka/arduino_modules/blob/master/images/led_module_running.png?raw=true)
 
 Push Button Module:
 --
-![Push button module](https://github.com/djukadjuka/arduino_modules/blob/master/push_button_running.png?raw=true)
+![Push button module](https://github.com/djukadjuka/arduino_modules/blob/master/images/push_button_running.png?raw=true)
 
 LCD Module:
 --
-![LCD Module](https://github.com/djukadjuka/arduino_modules/blob/master/lcd_module_image.jpg?raw=true)
+![LCD Module](https://github.com/djukadjuka/arduino_modules/blob/master/images/lcd_module_image.jpg?raw=true)
 
 Joystick Module:
 --
-![Joystick Module](https://github.com/djukadjuka/arduino_modules/blob/master/joystick_module_img.png?raw=true)
+![Joystick Module](https://github.com/djukadjuka/arduino_modules/blob/master/images/joystick_module_img.png?raw=true)
 
 
 <br>DISCLAMER

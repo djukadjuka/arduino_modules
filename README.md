@@ -35,6 +35,10 @@ Joystick Module:
 --
 ![Joystick Module](https://github.com/djukadjuka/arduino_modules/blob/master/images/joystick_module_img.png?raw=true)
 
+Servo Motor Module:
+-- 
+![Servo Motor Module](https://github.com/djukadjuka/arduino_modules/blob/master/images/arduino_servo.png?raw=true)
+
 
 <br>DISCLAMER
 -

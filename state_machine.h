@@ -6,10 +6,11 @@
 #include "base_module.h"
 
 // TODO: Includes for other modules ...
-#include "joystick_module.h"
+#include "servo_module.h"
 
 // STATE DEFINITIONS
 #define SS_INIT (0)
+#define S_SERVO_DELAY (1)
 
 // RESET DEFINITIONS
 #define SS_RESET (0)
@@ -19,6 +20,7 @@
 // MILLISECOND DEFINITIONS
 // Two seconds to reset
 #define MS_RESET_DELAY (2000)
+#define MS_SERVO_DELAY (1000)
 
 
 // OTHER DEFINITIONS (STR for LCD, ...)
@@ -35,19 +37,26 @@ class StateMachine: public BaseModule{
     int last_state_reset;
 
 	// TODO: Add modules here ...
-    JoystickModule joystick_module = JoystickModule(A0, A1);
+    ServoModule servo_module = ServoModule(3);
     
+    unsigned int get_time_passed(unsigned int current_millis){
+        return current_millis - this->last_update_millis;
+    }
+
+    unsigned int get_time_passed_reset(unsigned int current_millis){
+        return current_millis - this->last_update_millis_reset;
+    }
 
 public:
     void init_pins(){
         // TODO: Init pins
-        joystick_module.init_pins();
+        servo_module.init_pins();
         
     }
 
     void reset(){
         // TODO: Reset modules
-        joystick_module.reset();
+        servo_module.reset();
     }
 
     StateMachine(){
@@ -73,20 +82,15 @@ public:
 
         // Begin state logic
         if(SS_INIT == this->current_state){
-            if(joystick_module.down()){
-                Serial.println("down");
+            if(this->servo_module.get_servo_position() == 0){
+                this->servo_module.move_servo_to_pos(180);
+            }else{
+                this->servo_module.move_servo_to_pos(0);
             }
-            if(joystick_module.left()){
-                Serial.println("left");
-            }
-            if(joystick_module.right()){
-                Serial.println("right");
-            }
-            if(joystick_module.up()){
-                Serial.println("up");
-            }
-            if(joystick_module.mid()){
-                Serial.println("mid");
+            this->change_state(S_SERVO_DELAY);
+        }else if(S_SERVO_DELAY == this->current_state){
+            if(this->get_time_passed(current_millis) >= MS_SERVO_DELAY){
+                this->change_state(SS_INIT);
             }
         }
     }

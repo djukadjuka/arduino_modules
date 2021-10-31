@@ -16,6 +16,8 @@ Supported modules:
 - Push button
 - LCD
 - Joystick
+- Servo motor
+- Micro SD card reader
 
 <br>Module Descriptions
 ==
@@ -39,6 +41,9 @@ Servo Motor Module:
 -- 
 ![Servo Motor Module](https://github.com/djukadjuka/arduino_modules/blob/master/images/arduino_servo.png?raw=true)
 
+Micro SD Card Reader
+--
+![Micro SD Card Reader](https://github.com/djukadjuka/arduino_modules/blob/master/images/arduino_micro_sd_card.jpg?raw=true)
 
 <br>DISCLAMER
 -

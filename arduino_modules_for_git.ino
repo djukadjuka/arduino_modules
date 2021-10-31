@@ -1,6 +1,8 @@
 #if !defined(__PROJECT_H)
 #define __PROJECT_H
 
+#include <string.h>
+
 #include "state_machine.h"
 
 StateMachine state_machine;

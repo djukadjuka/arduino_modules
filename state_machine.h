@@ -6,11 +6,11 @@
 #include "base_module.h"
 
 // TODO: Includes for other modules ...
-#include "servo_module.h"
+#include "micro_sd_module.h"
 
 // STATE DEFINITIONS
 #define SS_INIT (0)
-#define S_SERVO_DELAY (1)
+#define S_DELAY (1)
 
 // RESET DEFINITIONS
 #define SS_RESET (0)
@@ -19,8 +19,8 @@
 
 // MILLISECOND DEFINITIONS
 // Two seconds to reset
-#define MS_RESET_DELAY (2000)
-#define MS_SERVO_DELAY (1000)
+#define MS_RESET_DELAY  (2000)
+#define MS_SD_WAIT      (3000)
 
 
 // OTHER DEFINITIONS (STR for LCD, ...)
@@ -37,7 +37,11 @@ class StateMachine: public BaseModule{
     int last_state_reset;
 
 	// TODO: Add modules here ...
-    ServoModule servo_module = ServoModule(3);
+    MicroSDModule micro_sd_module = MicroSDModule(10);
+
+    bool has_more_time_passed(unsigned int current_millis, unsigned int max_time){
+        return this->get_time_passed(current_millis) >= max_time;
+    }
     
     unsigned int get_time_passed(unsigned int current_millis){
         return current_millis - this->last_update_millis;
@@ -50,13 +54,12 @@ class StateMachine: public BaseModule{
 public:
     void init_pins(){
         // TODO: Init pins
-        servo_module.init_pins();
-        
+        this->micro_sd_module.init_pins();
     }
 
     void reset(){
         // TODO: Reset modules
-        servo_module.reset();
+        this->micro_sd_module.reset();
     }
 
     StateMachine(){
@@ -82,14 +85,18 @@ public:
 
         // Begin state logic
         if(SS_INIT == this->current_state){
-            if(this->servo_module.get_servo_position() == 0){
-                this->servo_module.move_servo_to_pos(180);
-            }else{
-                this->servo_module.move_servo_to_pos(0);
-            }
-            this->change_state(S_SERVO_DELAY);
-        }else if(S_SERVO_DELAY == this->current_state){
-            if(this->get_time_passed(current_millis) >= MS_SERVO_DELAY){
+            Serial.println("INIT");
+            this->micro_sd_module.write_to_file("wd.txt", "New data to write data file.\nThis is some data for the write data file.\n");
+
+            this->micro_sd_module.append_data_to_file("ad.txt", "\n\n\nThis is data to be appended to the programming file hello! :)\nComputers should be programmed with software.");
+
+            String data = this->micro_sd_module.read_from_file("rd.txt");
+            Serial.print(">> ");
+            Serial.println(data);
+
+            this->change_state(S_DELAY);
+        }else if(S_DELAY == this->current_state){
+            if(this->has_more_time_passed(current_millis, MS_SD_WAIT)){
                 this->change_state(SS_INIT);
             }
         }

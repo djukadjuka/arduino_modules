@@ -18,6 +18,7 @@ Supported modules:
 - Joystick
 - Servo motor
 - Micro SD card reader
+- SD card reader
 
 <br>Module Descriptions
 ==
@@ -44,6 +45,11 @@ Servo Motor Module:
 Micro SD Card Reader
 --
 ![Micro SD Card Reader](https://github.com/djukadjuka/arduino_modules/blob/master/images/arduino_micro_sd_card.jpg?raw=true)
+
+SD Card Reader
+--
+![SD Card Reader](https://github.com/djukadjuka/arduino_modules/blob/master/images/arduino_sd_card.png?raw=true)
+
 
 <br>DISCLAMER
 -

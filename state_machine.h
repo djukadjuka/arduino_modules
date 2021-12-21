@@ -6,11 +6,10 @@
 #include "base_module.h"
 
 // TODO: Includes for other modules ...
-#include "sd_module.h"
+#include "dec_cd74hc238e_module.h"
 
 // STATE DEFINITIONS
 #define SS_INIT (0)
-#define S_DELAY (1)
 
 // RESET DEFINITIONS
 #define SS_RESET (0)
@@ -20,7 +19,6 @@
 // MILLISECOND DEFINITIONS
 // Two seconds to reset
 #define MS_RESET_DELAY  (2000)
-#define MS_SD_WAIT      (3000)
 
 
 // OTHER DEFINITIONS (STR for LCD, ...)
@@ -37,7 +35,7 @@ class StateMachine: public BaseModule{
     int last_state_reset;
 
 	// TODO: Add modules here ...
-    SDModule sd_module = SDModule(4);
+    DecCd74Hc238eModule decoder = DecCd74Hc238eModule(2, 3, 4, 8);
 
     bool has_more_time_passed(unsigned int current_millis, unsigned int max_time){
         return this->get_time_passed(current_millis) >= max_time;
@@ -54,12 +52,12 @@ class StateMachine: public BaseModule{
 public:
     void init_pins(){
         // TODO: Init pins
-        this->sd_module.init_pins();
+        this->decoder.init_pins();
     }
 
     void reset(){
         // TODO: Reset modules
-        this->sd_module.reset();
+        this->decoder.reset();
     }
 
     StateMachine(){
@@ -85,20 +83,19 @@ public:
 
         // Begin state logic
         if(SS_INIT == this->current_state){
-            Serial.println("INIT");
-            this->sd_module.write_to_file("wd.txt", "New data to write data file.\nThis is some data for the write data file.\n");
-
-            this->sd_module.append_data_to_file("ad.txt", "\n\n\nThis is data to be appended to the programming file hello! :)\nComputers should be programmed with software.");
-
-            String data = this->sd_module.read_from_file("rd.txt");
-            Serial.print(">> ");
-            Serial.println(data);
-
-            this->change_state(S_DELAY);
-        }else if(S_DELAY == this->current_state){
-            if(this->has_more_time_passed(current_millis, MS_SD_WAIT)){
-                this->change_state(SS_INIT);
+            // Enable
+            Serial.println("Output 0, enabled true.");
+            this->decoder.set_output_code(0);
+            this->decoder.set_enabled(true);
+            
+            for(uint8_t i=0;    i < 8;  i++){
+                this->decoder.set_output_code(i);
+                delay(500);
             }
+
+            this->decoder.set_enabled(false);
+            Serial.println("Enabled false.");
+            delay(1000);
         }
     }
 

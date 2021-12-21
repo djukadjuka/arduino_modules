@@ -19,6 +19,7 @@ Supported modules:
 - Servo motor
 - Micro SD card reader
 - SD card reader
+- Decoder CD74HC238e
 
 <br>Module Descriptions
 ==
@@ -50,6 +51,9 @@ SD Card Reader
 --
 ![SD Card Reader](https://github.com/djukadjuka/arduino_modules/blob/master/images/arduino_sd_card.png?raw=true)
 
+Decoder CD74HC238e
+--
+![Decoder CD74HC238e](https://github.com/djukadjuka/arduino_modules/blob/master/images/decoder_cd74hc238e.png?raw=true)
 
 <br>DISCLAMER
 -

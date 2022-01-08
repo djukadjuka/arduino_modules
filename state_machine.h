@@ -6,7 +6,7 @@
 #include "base_module.h"
 
 // TODO: Includes for other modules ...
-#include "dec_cd74hc238e_module.h"
+#include "mini_oled.h"
 
 // STATE DEFINITIONS
 #define SS_INIT (0)
@@ -35,7 +35,7 @@ class StateMachine: public BaseModule{
     int last_state_reset;
 
 	// TODO: Add modules here ...
-    DecCd74Hc238eModule decoder = DecCd74Hc238eModule(2, 3, 4, 8);
+    MiniOLEDModule oled = MiniOLEDModule();
 
     bool has_more_time_passed(unsigned int current_millis, unsigned int max_time){
         return this->get_time_passed(current_millis) >= max_time;
@@ -52,12 +52,12 @@ class StateMachine: public BaseModule{
 public:
     void init_pins(){
         // TODO: Init pins
-        this->decoder.init_pins();
+        this->oled.init_pins();
     }
 
     void reset(){
         // TODO: Reset modules
-        this->decoder.reset();
+        
     }
 
     StateMachine(){
@@ -83,19 +83,7 @@ public:
 
         // Begin state logic
         if(SS_INIT == this->current_state){
-            // Enable
-            Serial.println("Output 0, enabled true.");
-            this->decoder.set_output_code(0);
-            this->decoder.set_enabled(true);
             
-            for(uint8_t i=0;    i < 8;  i++){
-                this->decoder.set_output_code(i);
-                delay(500);
-            }
-
-            this->decoder.set_enabled(false);
-            Serial.println("Enabled false.");
-            delay(1000);
         }
     }
 

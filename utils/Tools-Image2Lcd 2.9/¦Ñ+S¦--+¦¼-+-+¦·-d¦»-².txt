@@ -1,0 +1,23 @@
+//取模方式 水平扫描 从左到右 低位在前
+// Horizontal left to right low order first
+void showimage(const unsigned char *p) //显示40*40 QQ图片
+										// Display 40*40 QQ picture
+{
+  	int i,j,k; 
+	unsigned char picH,picL;
+	dsp_single_colour(WHITE); //清屏   // Clear screen
+	
+	for(k=0;k<3;k++)
+	{
+	   	for(j=0;j<3;j++)
+		{	
+			Lcd_SetRegion(40*j,40*k,40*j+39,40*k+39);		//坐标设置 // Coordinate setting
+		    for(i=0;i<40*40;i++)
+			 {	
+			 	picL=*(p+i*2);	//数据低位在前 // Low data first
+				picH=*(p+i*2+1);				
+				LCD_WriteData_16Bit(picH<<8|picL);  						
+			 }	
+		 }
+	}		
+}

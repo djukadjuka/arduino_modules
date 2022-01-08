@@ -65,6 +65,10 @@ Decoder CD74HC238e
 --
 ![Decoder CD74HC238e](https://github.com/djukadjuka/arduino_modules/blob/master/images/decoder_module.png?raw=true)
 
+Mini OLED
+--
+![Mini OLED](https://github.com/djukadjuka/arduino_modules/blob/master/images/arduino_oled.png?raw=true)
+
 <br>DISCLAMER
 -
 These modules were all written while I was drunk, and tested while I was drunk.

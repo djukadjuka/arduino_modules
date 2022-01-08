@@ -10,6 +10,16 @@ Each module should be used only in state machine, and should call reset and init
 
 Images for wirings and example programs will be added in separate timing on master branch.
 
+Libraries needed:
+--
+
+- ssd1306 (download from arduino IDE)
+![ssd1306](https://github.com/djukadjuka/arduino_modules/blob/master/images/download_lib_ssd1306.PNG?raw=true)
+
+- GFX (download from arduino IDE)
+![Led module](https://github.com/djukadjuka/arduino_modules/blob/master/images/download_lib_gfx.PNG?raw=true)
+
+
 Supported modules:
 --
 - LED

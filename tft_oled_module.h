@@ -2,7 +2,6 @@
 #define __TFT_OLED_MODULE_H
 
 #include "base_module.h"
-#include "tamara_slika.h"
 
 #include <LCDWIKI_GUI.h> // Core graphics library
 #include <LCDWIKI_SPI.h> // Hardware-specific library
@@ -66,7 +65,6 @@ public:
 
     void draw_image(){
         this->screen->Set_Addr_Window(0, 0, 58, 79);
-        this->screen->Push_Any_Color(gImage_tamara, sizeof(gImage_tamara) / 2, 1, 1);
     }
 
     //////////////////////
